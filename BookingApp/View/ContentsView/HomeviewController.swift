@@ -9,5 +9,9 @@ import UIKit
 
 class HomeviewController: UIViewController {
   
-  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = .white
+    self.tabBarItem.title = "검색 탭"
+  }
 }

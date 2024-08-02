@@ -14,7 +14,12 @@ class TabBarController: UITabBarController {
     // Do any additional setup after loading the view.
   }
   
-  let firstVC = 
+  let firstVC = HomeviewController()
+  let firstNavController = UINavigationController(rootViewController: firstVC)
+  let secondVC = WishListController()
+  let secondNavController = UINavigationController(rootViewController: firstVC)
+  
+  viewcontrollers = [firstNavController, secondNavController]
 
 
 }
