@@ -10,9 +10,17 @@ import SnapKit
 
 final class HomeviewController: UIViewController {
 
-  let collectionView = RecentlyWatchedView()
+  let collectionView = RecentlyWatchedViewCell()
   let tableView = SearchListView()
-  let searchField = UISearchBar()
+  lazy var searchField = {
+    let temp = UISearchBar()
+    temp.placeholder = "Search"
+    temp.setImage(UIImage(named: "icSearchNonW"), for: UISearchBar.Icon.search, state: .normal)
+    temp.layer.borderColor = UIColor.clear.cgColor
+    temp.searchBarStyle = .minimal
+
+    return temp
+  }()
   let searchFieldBtn = UIButton()
   
   override func viewDidLoad() {
@@ -30,13 +38,24 @@ final class HomeviewController: UIViewController {
   
   private func configureUI(){
     [
+     searchField,
      collectionView,
      tableView
      
     ].forEach{self.view.addSubview($0)}
     
+    searchField.snp.makeConstraints{
+      $0.width.equalTo(view.safeAreaLayoutGuide)
+      $0.height.equalTo(60)
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(view.safeAreaLayoutGuide)
+    }
+    
     collectionView.snp.makeConstraints{
-      
+      $0.width.equalToSuperview().inset(-20)
+      $0.height.equalTo(100)
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(searchField.snp.bottom).offset(40)
     }
     
   }

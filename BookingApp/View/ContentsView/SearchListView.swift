@@ -8,6 +8,9 @@
 import UIKit
 
 class SearchListView: UITableViewCell {
+  
+  static let id = "searchListView"
+  
   let title = "검색 결과"
   
   let titleLabel = {
@@ -27,16 +30,67 @@ class SearchListView: UITableViewCell {
     return lb
   }()
   
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
 }
 
 
-class RecentlyWatchedView: UICollectionViewCell {
-  let title = "최근 본 책"
+class RecentlyWatchedViewCell: UICollectionViewCell {
+  static let id = "recentlyWatchedViewCell"
+  let title = "최근 본 책" //헤더 이름 만들어야함
   let imageLabel = {
     let il = UIImageView()
     il.contentMode = .scaleAspectFit
     return il
   }()
   
+
   
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  
+  
+  private func configureUI(){
+    
+    [
+      imageLabel
+    ].forEach{self.addSubview($0)}
+    
+  }
+  
+}
+
+class RecentlyHeaderView: UICollectionReusableView {
+  
+  static let id = "recentlyHeaderView"
+  private let label = {
+    let lb = UILabel()
+    lb.text = "최근 본 책"
+    lb.textAlignment = .left
+    lb.textColor = .black
+    lb.font = .systemFont(ofSize: 20)
+    return lb
+  }()
+  func configure(){
+    backgroundColor = .clear
+    addSubview(label)
+  }
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    label.frame = bounds
+  }
 }
