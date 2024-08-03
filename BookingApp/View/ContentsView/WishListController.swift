@@ -11,7 +11,8 @@ class WishListController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.tabBarItem.title = "담은책 리스트 탭"
+
+    view.backgroundColor = .white
   }
   
 }

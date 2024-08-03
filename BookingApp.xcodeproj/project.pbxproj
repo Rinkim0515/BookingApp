@@ -113,9 +113,9 @@
 		9F18CE0C2C5D30B200646D2E /* ContentsView */ = {
 			isa = PBXGroup;
 			children = (
-				9F18CE002C5D2A8700646D2E /* BookDetailView.swift */,
 				9F18CE0A2C5D2F8400646D2E /* HomeviewController.swift */,
 				9F18CE062C5D2D1300646D2E /* WishListController.swift */,
+				9F18CE002C5D2A8700646D2E /* BookDetailView.swift */,
 				9F18CE082C5D2D5D00646D2E /* SearchListView.swift */,
 			);
 			path = ContentsView;
