@@ -6,12 +6,11 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchListView: UITableViewCell {
   
-  static let id = "searchListView"
-  
-  let title = "검색 결과"
+  static let id = "searchListViewCell"
   
   let titleLabel = {
     let lb = UILabel()
@@ -32,11 +31,28 @@ class SearchListView: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+    configureUI()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func configureUI(){
+    [
+     titleLabel,
+     authorLabel,
+     priceLabel
+    
+    ].forEach{contentView.addSubview($0)}
+    
+    titleLabel.snp.makeConstraints{
+      $0.centerY.equalTo(contentView)
+      $0.leading.equalTo(contentView).offset(20)
+      $0.width.equalTo(100)
+      $0.height.equalTo(50)
+    }
+    
   }
   
 }
@@ -110,4 +126,54 @@ class RecentlyHeaderView: UICollectionReusableView {
     super.layoutSubviews()
     titleLabel.frame = bounds
   }
+}
+
+
+class favoritesCell: UITableViewCell {
+  
+  static let id = "favoritesCell"
+  
+  let titleLabel = {
+    let lb = UILabel()
+    lb.text = "세이노의 가르침"
+    return lb
+  }()
+  let authorLabel = {
+    let lb = UILabel()
+    lb.text = "세이노"
+    return lb
+    
+  }()
+  let priceLabel = {
+    let lb = UILabel()
+    lb.text = "14,000" // 형변환 아마도 필요할듯 int로 받지않을까? 그리고 컴마 추가
+    return lb
+  }()
+  
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    configureUI()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func configureUI(){
+    [
+     titleLabel,
+     authorLabel,
+     priceLabel
+    
+    ].forEach{contentView.addSubview($0)}
+    
+    titleLabel.snp.makeConstraints{
+      $0.centerY.equalTo(contentView)
+      $0.leading.equalTo(contentView).offset(20)
+      $0.width.equalTo(100)
+      $0.height.equalTo(50)
+    }
+    
+  }
+
 }

@@ -9,7 +9,21 @@ import UIKit
 import SnapKit
 
 final class HomeviewController: UIViewController {
-  private let titleLabel = ""
+  private let firstTitleLabel = {
+    let lb = UILabel()
+    lb.text = "최근 본 책"
+    lb.font = UIFont.boldSystemFont(ofSize: 30)
+    lb.textAlignment = .left
+    return lb
+  }()
+  
+  private let secondTitleLabel = {
+    let lb = UILabel()
+    lb.text = "검색 결과"
+    lb.font = UIFont.boldSystemFont(ofSize: 30)
+    lb.textAlignment = .left
+    return lb
+  }()
 
   lazy var listcollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -20,12 +34,24 @@ final class HomeviewController: UIViewController {
     collectionView.dataSource = self
     collectionView.delegate = self
     collectionView.register(RecentlyWatchedViewCell.self, forCellWithReuseIdentifier: RecentlyWatchedViewCell.id)
-    collectionView.register(RecentlyHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "recentlyHeaderView")
-    collectionView.showsHorizontalScrollIndicator = false
+    
+
+    collectionView.showsHorizontalScrollIndicator = true
     return collectionView
   }()
   
-  let tableView = SearchListView()
+  lazy var SearchTableView = {
+    let tv = UITableView()
+    tv.delegate = self
+    tv.dataSource = self
+    tv.register(SearchListView.self, forCellReuseIdentifier:  SearchListView.id)
+    
+    
+    return tv
+  }()
+  
+  
+  
   lazy var searchField = {
     let temp = UISearchBar()
     temp.placeholder = "Search"
@@ -48,15 +74,22 @@ final class HomeviewController: UIViewController {
   }
   
   private func configureBasicSetting(){
-    
 
+
+  }
+  
+  private func presentVC(){
+    let deailVC = BookDetailView()
+    present(deailVC, animated: true)
   }
   
   private func configureUI(){
     [
-     searchField,
+      searchField,
+     firstTitleLabel,
      listcollectionView,
-     tableView
+      secondTitleLabel,
+      SearchTableView
      
     ].forEach{self.view.addSubview($0)}
     
@@ -66,37 +99,66 @@ final class HomeviewController: UIViewController {
       $0.centerX.equalToSuperview()
       $0.top.equalTo(view.safeAreaLayoutGuide)
     }
+    firstTitleLabel.snp.makeConstraints{
+      $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
+      $0.top.equalTo(searchField.snp.bottom).offset(20)
+    }
     
     listcollectionView.snp.makeConstraints{
       $0.width.equalToSuperview().inset(30)
       $0.height.equalTo(120)
       $0.centerX.equalToSuperview()
-      $0.top.equalTo(searchField.snp.bottom).offset(40)
+      $0.top.equalTo(firstTitleLabel.snp.bottom).offset(10)
+    }
+    
+    secondTitleLabel.snp.makeConstraints{
+      $0.leading.equalTo(firstTitleLabel.snp.leading)
+      $0.top.equalTo(firstTitleLabel.snp.bottom).offset(160)
+    }
+    SearchTableView.snp.makeConstraints{
+      $0.top.equalTo(secondTitleLabel.snp.bottom).offset(10)
+      $0.height.equalTo(300)
+      $0.centerX.equalToSuperview()
+      $0.width.equalToSuperview().inset(30)
+      
     }
     
   }
 }
 
-extension HomeviewController: UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource {
+extension HomeviewController: UITableViewDelegate,UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      60
+  }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 10
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchListView.id, for: indexPath) as? SearchListView
+    else { return UITableViewCell()}
+    
+    return cell
+  }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    presentVC()
+  }
+  
+}
+
+extension HomeviewController: UICollectionViewDelegate,UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyWatchedViewCell.id, for: indexPath)
+    
+    return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 10
   }
   
-  
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    presentVC()
   }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyWatchedViewCell.id, for: indexPath)
-    
-    return cell
-  }
-
-  
 }
