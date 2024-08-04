@@ -45,9 +45,17 @@ class SearchListView: UITableViewCell {
 class RecentlyWatchedViewCell: UICollectionViewCell {
   static let id = "recentlyWatchedViewCell"
   let title = "최근 본 책" //헤더 이름 만들어야함
+  
   let imageLabel = {
     let il = UIImageView()
     il.contentMode = .scaleAspectFit
+    
+    il.image = UIImage(named: "pokemonBall")
+    il.layer.cornerRadius = 50
+    
+    il.layer.borderWidth = 1.0
+    il.layer.borderColor = UIColor.red.cgColor
+    
     return il
   }()
   
@@ -56,6 +64,8 @@ class RecentlyWatchedViewCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    configureUI()
+
   }
   
   required init?(coder: NSCoder) {
@@ -70,6 +80,13 @@ class RecentlyWatchedViewCell: UICollectionViewCell {
       imageLabel
     ].forEach{self.addSubview($0)}
     
+    imageLabel.snp.makeConstraints{
+      $0.centerX.centerY.equalTo(self)
+      $0.width.height.equalTo(self).inset(10)
+      
+      
+    }
+    
   }
   
 }
@@ -77,7 +94,7 @@ class RecentlyWatchedViewCell: UICollectionViewCell {
 class RecentlyHeaderView: UICollectionReusableView {
   
   static let id = "recentlyHeaderView"
-  private let label = {
+  private let titleLabel = {
     let lb = UILabel()
     lb.text = "최근 본 책"
     lb.textAlignment = .left
@@ -87,10 +104,10 @@ class RecentlyHeaderView: UICollectionReusableView {
   }()
   func configure(){
     backgroundColor = .clear
-    addSubview(label)
+    addSubview(titleLabel)
   }
   override func layoutSubviews() {
     super.layoutSubviews()
-    label.frame = bounds
+    titleLabel.frame = bounds
   }
 }

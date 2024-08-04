@@ -9,8 +9,22 @@ import UIKit
 import SnapKit
 
 final class HomeviewController: UIViewController {
+  private let titleLabel = ""
 
-  let collectionView = RecentlyWatchedViewCell()
+  lazy var listcollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    layout.itemSize = CGSize(width: 120, height: 120)
+    layout.minimumLineSpacing = 10
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout:  layout)
+    collectionView.dataSource = self
+    collectionView.delegate = self
+    collectionView.register(RecentlyWatchedViewCell.self, forCellWithReuseIdentifier: RecentlyWatchedViewCell.id)
+    collectionView.register(RecentlyHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "recentlyHeaderView")
+    collectionView.showsHorizontalScrollIndicator = false
+    return collectionView
+  }()
+  
   let tableView = SearchListView()
   lazy var searchField = {
     let temp = UISearchBar()
@@ -28,32 +42,34 @@ final class HomeviewController: UIViewController {
     view.backgroundColor = .white
     configureBasicSetting()
     configureUI()
+    
 
 
   }
   
   private func configureBasicSetting(){
+    
 
   }
   
   private func configureUI(){
     [
      searchField,
-     collectionView,
+     listcollectionView,
      tableView
      
     ].forEach{self.view.addSubview($0)}
     
     searchField.snp.makeConstraints{
-      $0.width.equalTo(view.safeAreaLayoutGuide)
+      $0.width.equalTo(view.safeAreaLayoutGuide).inset(30)
       $0.height.equalTo(60)
       $0.centerX.equalToSuperview()
       $0.top.equalTo(view.safeAreaLayoutGuide)
     }
     
-    collectionView.snp.makeConstraints{
-      $0.width.equalToSuperview().inset(-20)
-      $0.height.equalTo(100)
+    listcollectionView.snp.makeConstraints{
+      $0.width.equalToSuperview().inset(30)
+      $0.height.equalTo(120)
       $0.centerX.equalToSuperview()
       $0.top.equalTo(searchField.snp.bottom).offset(40)
     }
@@ -70,13 +86,17 @@ extension HomeviewController: UITableViewDelegate,UITableViewDataSource,UICollec
     return 10
   }
   
+  
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     return UITableViewCell()
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    return UICollectionViewCell()
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentlyWatchedViewCell.id, for: indexPath)
+    
+    return cell
   }
-  
+
   
 }
