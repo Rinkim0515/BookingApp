@@ -21,27 +21,39 @@ class NetworkController {
   
   static let shared = NetworkController()
   
-  let BASE_URL = "https://dapi.kakao.com/v3/search/book?sort=accuracy&target=title&query="
+  let S_BASE_URL = "https://dapi.kakao.com/v3/search/book?query="
   let API_KEY = "4ad73036f5366f94754121d02999f8e9"
   
   private init(){}
   
+//  func fetchURL() -> URL{}
+//    
+//  }
   
-  func fetch<T: Decodable>(query: String) -> Single<T> {
+//  let url = URL(string: self.BASE_URL + query)!
+  
+  func temp(){
+    let url = URL(string: "https://dapi.kakao.com/v3/search/book?query=세이노")!
+    
+    
+  }
+  
+  
+  
+  func fetch<T: Decodable>(url: URL) -> Single<T> {
     
     
     
     return Single.create(subscribe: {
       observer in
       
-      let url = URL(string: self.BASE_URL + query)!
+      
       
       var request = URLRequest(url: url)
-      request.httpMethod = "GET"
-      request.setValue("KakaoAK\(self.API_KEY)", forHTTPHeaderField: "Authorization")
-      let session = URLSession(configuration: .default)
+      request.allHTTPHeaderFields = ["Authorization": "KakaoAK 4ad73036f5366f94754121d02999f8e9"]
       
-      session.dataTask(with: request) { data, response, error in
+      
+      URLSession.shared.dataTask(with: request) { data, response, error in
         
         if let error = error { observer(.failure(error))
           return }

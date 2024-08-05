@@ -7,8 +7,16 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 final class HomeviewController: UIViewController {
+  
+  let list = ListViewModel()
+  private let disposeBag = DisposeBag()
+  private var listSubject = [Document]()
+  
+  
+  
   private let firstTitleLabel = {
     let lb = UILabel()
     lb.text = "최근 본 책"
@@ -68,8 +76,23 @@ final class HomeviewController: UIViewController {
     view.backgroundColor = .white
     configureBasicSetting()
     configureUI()
+    bind()
     
 
+
+  }
+  
+  
+  func bind(){
+    list.ListSubject
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: {[weak self] lists in
+        self?.listSubject = lists
+        print(lists)
+      },onError: {error in
+        print(error)
+      }).disposed(by: disposeBag)
+    
 
   }
   
