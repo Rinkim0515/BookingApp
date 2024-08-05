@@ -21,6 +21,12 @@
 		9F18CE072C5D2D1300646D2E /* WishListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE062C5D2D1300646D2E /* WishListController.swift */; };
 		9F18CE092C5D2D5D00646D2E /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE082C5D2D5D00646D2E /* BookCell.swift */; };
 		9F18CE0B2C5D2F8400646D2E /* HomeviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE0A2C5D2F8400646D2E /* HomeviewController.swift */; };
+		9FE19E7E2C6139AD00EB9213 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E7D2C6139AD00EB9213 /* Alamofire */; };
+		9FE19E812C613A0C00EB9213 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE19E802C613A0C00EB9213 /* NetworkController.swift */; };
+		9FE19E832C613E4C00EB9213 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE19E822C613E4C00EB9213 /* Model.swift */; };
+		9FE19E862C61400700EB9213 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E852C61400700EB9213 /* RxBlocking */; };
+		9FE19E882C61400700EB9213 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E872C61400700EB9213 /* RxCocoa */; };
+		9FE19E8A2C61400700EB9213 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E892C61400700EB9213 /* RxRelay */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +44,8 @@
 		9F18CE062C5D2D1300646D2E /* WishListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListController.swift; sourceTree = "<group>"; };
 		9F18CE082C5D2D5D00646D2E /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		9F18CE0A2C5D2F8400646D2E /* HomeviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeviewController.swift; sourceTree = "<group>"; };
+		9FE19E802C613A0C00EB9213 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		9FE19E822C613E4C00EB9213 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +53,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE19E8A2C61400700EB9213 /* RxRelay in Frameworks */,
+				9FE19E7E2C6139AD00EB9213 /* Alamofire in Frameworks */,
+				9FE19E862C61400700EB9213 /* RxBlocking in Frameworks */,
+				9FE19E882C61400700EB9213 /* RxCocoa in Frameworks */,
 				9F18CDF82C5D28B000646D2E /* Kingfisher in Frameworks */,
 				9F18CDFB2C5D28C000646D2E /* SnapKit in Frameworks */,
 			);
@@ -72,6 +84,7 @@
 		9F18CDE12C5D289E00646D2E /* BookingApp */ = {
 			isa = PBXGroup;
 			children = (
+				9FE19E7F2C613A0100EB9213 /* Common */,
 				9F18CDFE2C5D28E100646D2E /* Model */,
 				9F18CDFD2C5D28DE00646D2E /* View */,
 				9F18CDFC2C5D28DC00646D2E /* ViewModel */,
@@ -106,6 +119,7 @@
 		9F18CDFE2C5D28E100646D2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9FE19E822C613E4C00EB9213 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -119,6 +133,14 @@
 				9F18CE082C5D2D5D00646D2E /* BookCell.swift */,
 			);
 			path = ContentsView;
+			sourceTree = "<group>";
+		};
+		9FE19E7F2C613A0100EB9213 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9FE19E802C613A0C00EB9213 /* NetworkController.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +162,10 @@
 			packageProductDependencies = (
 				9F18CDF72C5D28B000646D2E /* Kingfisher */,
 				9F18CDFA2C5D28C000646D2E /* SnapKit */,
+				9FE19E7D2C6139AD00EB9213 /* Alamofire */,
+				9FE19E852C61400700EB9213 /* RxBlocking */,
+				9FE19E872C61400700EB9213 /* RxCocoa */,
+				9FE19E892C61400700EB9213 /* RxRelay */,
 			);
 			productName = BookingApp;
 			productReference = 9F18CDDF2C5D289E00646D2E /* BookingApp.app */;
@@ -172,6 +198,8 @@
 			packageReferences = (
 				9F18CDF62C5D28B000646D2E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				9F18CDF92C5D28C000646D2E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				9FE19E7C2C6139AD00EB9213 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9FE19E842C61400700EB9213 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 9F18CDE02C5D289E00646D2E /* Products */;
 			projectDirPath = "";
@@ -199,8 +227,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE19E812C613A0C00EB9213 /* NetworkController.swift in Sources */,
 				9F18CDE72C5D289E00646D2E /* TabBarController.swift in Sources */,
 				9F18CE0B2C5D2F8400646D2E /* HomeviewController.swift in Sources */,
+				9FE19E832C613E4C00EB9213 /* Model.swift in Sources */,
 				9F18CDEA2C5D289E00646D2E /* BookingApp.xcdatamodeld in Sources */,
 				9F18CE052C5D2C7A00646D2E /* DetailViewModel.swift in Sources */,
 				9F18CE032C5D2C6F00646D2E /* ListViewModel.swift in Sources */,
@@ -439,6 +469,22 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		9FE19E7C2C6139AD00EB9213 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		9FE19E842C61400700EB9213 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -451,6 +497,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9F18CDF92C5D28C000646D2E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		9FE19E7D2C6139AD00EB9213 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FE19E7C2C6139AD00EB9213 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		9FE19E852C61400700EB9213 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FE19E842C61400700EB9213 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		9FE19E872C61400700EB9213 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FE19E842C61400700EB9213 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		9FE19E892C61400700EB9213 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FE19E842C61400700EB9213 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
 		};
 /* End XCSwiftPackageProductDependency section */
 
