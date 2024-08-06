@@ -15,8 +15,6 @@ final class HomeviewController: UIViewController {
   private let disposeBag = DisposeBag()
   private var listSubject = [Document]()
   
-  
-  
   private let firstTitleLabel = {
     let lb = UILabel()
     lb.text = "최근 본 책"
@@ -42,8 +40,6 @@ final class HomeviewController: UIViewController {
     collectionView.dataSource = self
     collectionView.delegate = self
     collectionView.register(RecentlyWatchedViewCell.self, forCellWithReuseIdentifier: RecentlyWatchedViewCell.id)
-    
-
     collectionView.showsHorizontalScrollIndicator = true
     return collectionView
   }()
@@ -53,8 +49,6 @@ final class HomeviewController: UIViewController {
     tv.delegate = self
     tv.dataSource = self
     tv.register(SearchListView.self, forCellReuseIdentifier:  SearchListView.id)
-    
-    
     return tv
   }()
   
@@ -66,9 +60,9 @@ final class HomeviewController: UIViewController {
     temp.setImage(UIImage(named: "icSearchNonW"), for: UISearchBar.Icon.search, state: .normal)
     temp.layer.borderColor = UIColor.clear.cgColor
     temp.searchBarStyle = .minimal
-
     return temp
   }()
+  
   let searchFieldBtn = UIButton()
   
   override func viewDidLoad() {
@@ -77,9 +71,6 @@ final class HomeviewController: UIViewController {
     configureBasicSetting()
     configureUI()
     bind()
-    
-
-
   }
   
   
@@ -88,13 +79,12 @@ final class HomeviewController: UIViewController {
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: {[weak self] lists in
         self?.listSubject = lists
-        print(lists)
       },onError: {error in
         print(error)
       }).disposed(by: disposeBag)
-    
-
   }
+  
+  
   
   private func configureBasicSetting(){
 
@@ -113,9 +103,7 @@ final class HomeviewController: UIViewController {
      listcollectionView,
       secondTitleLabel,
       SearchTableView
-     
     ].forEach{self.view.addSubview($0)}
-    
     searchField.snp.makeConstraints{
       $0.width.equalTo(view.safeAreaLayoutGuide).inset(30)
       $0.height.equalTo(60)
@@ -126,14 +114,12 @@ final class HomeviewController: UIViewController {
       $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(30)
       $0.top.equalTo(searchField.snp.bottom).offset(20)
     }
-    
     listcollectionView.snp.makeConstraints{
       $0.width.equalToSuperview().inset(30)
       $0.height.equalTo(120)
       $0.centerX.equalToSuperview()
       $0.top.equalTo(firstTitleLabel.snp.bottom).offset(10)
     }
-    
     secondTitleLabel.snp.makeConstraints{
       $0.leading.equalTo(firstTitleLabel.snp.leading)
       $0.top.equalTo(firstTitleLabel.snp.bottom).offset(160)
@@ -143,9 +129,7 @@ final class HomeviewController: UIViewController {
       $0.height.equalTo(300)
       $0.centerX.equalToSuperview()
       $0.width.equalToSuperview().inset(30)
-      
     }
-    
   }
 }
 
@@ -154,16 +138,23 @@ extension HomeviewController: UITableViewDelegate,UITableViewDataSource {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       60
   }
+  
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return listSubject.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchListView.id, for: indexPath) as? SearchListView
     else { return UITableViewCell()}
-    
+    let list = listSubject[indexPath.row]
+    cell.authorLabel.text = list.authors[0]
     return cell
+    
+    
   }
+  
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     presentVC()
   }
