@@ -119,6 +119,18 @@ class BookDetailView: UIViewController {
     
   }
   
+  func bindData(with docs: Document){
+    let urlString = docs.thumbnail
+    let url = URL(string: urlString!)
+    DispatchQueue.main.async {
+      self.authorLabel.text = docs.authors[0]
+      self.overviewLabel.text = docs.contents
+      self.priceLabel.text = "\(docs.price)"    
+      self.bookImagelabel.kf.setImage(with: url)
+    }
+    
+  }
+  
   @objc func goBackButton(){}
   @objc func addWishListButton(){}
   

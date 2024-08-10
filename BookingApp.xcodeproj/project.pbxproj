@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9F18CDE32C5D289E00646D2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CDE22C5D289E00646D2E /* AppDelegate.swift */; };
 		9F18CDE52C5D289E00646D2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CDE42C5D289E00646D2E /* SceneDelegate.swift */; };
-		9F18CDE72C5D289E00646D2E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CDE62C5D289E00646D2E /* TabBarController.swift */; };
 		9F18CDEA2C5D289E00646D2E /* BookingApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CDE82C5D289E00646D2E /* BookingApp.xcdatamodeld */; };
 		9F18CDEC2C5D289F00646D2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F18CDEB2C5D289F00646D2E /* Assets.xcassets */; };
 		9F18CDEF2C5D289F00646D2E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 9F18CDEE2C5D289F00646D2E /* Base */; };
@@ -20,20 +19,23 @@
 		9F18CE052C5D2C7A00646D2E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE042C5D2C7A00646D2E /* DetailViewModel.swift */; };
 		9F18CE072C5D2D1300646D2E /* WishListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE062C5D2D1300646D2E /* WishListController.swift */; };
 		9F18CE092C5D2D5D00646D2E /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE082C5D2D5D00646D2E /* BookCell.swift */; };
-		9F18CE0B2C5D2F8400646D2E /* HomeviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE0A2C5D2F8400646D2E /* HomeviewController.swift */; };
+		9F18CE0B2C5D2F8400646D2E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE0A2C5D2F8400646D2E /* SearchViewController.swift */; };
+		9FD8990C2C6297DB00F070E1 /* FavoritesList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD8990A2C6297DB00F070E1 /* FavoritesList+CoreDataClass.swift */; };
+		9FD8990D2C6297DB00F070E1 /* FavoritesList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD8990B2C6297DB00F070E1 /* FavoritesList+CoreDataProperties.swift */; };
+		9FD8990F2C64EC5D00F070E1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD8990E2C64EC5D00F070E1 /* Extension.swift */; };
 		9FE19E7E2C6139AD00EB9213 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E7D2C6139AD00EB9213 /* Alamofire */; };
 		9FE19E812C613A0C00EB9213 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE19E802C613A0C00EB9213 /* NetworkController.swift */; };
-		9FE19E832C613E4C00EB9213 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE19E822C613E4C00EB9213 /* Model.swift */; };
+		9FE19E832C613E4C00EB9213 /* BookResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE19E822C613E4C00EB9213 /* BookResponse.swift */; };
 		9FE19E862C61400700EB9213 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E852C61400700EB9213 /* RxBlocking */; };
 		9FE19E882C61400700EB9213 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E872C61400700EB9213 /* RxCocoa */; };
 		9FE19E8A2C61400700EB9213 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E892C61400700EB9213 /* RxRelay */; };
+		9FE1E0DE2C678180003C448E /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE1E0DD2C678180003C448E /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9F18CDDF2C5D289E00646D2E /* BookingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F18CDE22C5D289E00646D2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F18CDE42C5D289E00646D2E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9F18CDE62C5D289E00646D2E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9F18CDE92C5D289E00646D2E /* BookingApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookingApp.xcdatamodel; sourceTree = "<group>"; };
 		9F18CDEB2C5D289F00646D2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F18CDEE2C5D289F00646D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,9 +45,12 @@
 		9F18CE042C5D2C7A00646D2E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		9F18CE062C5D2D1300646D2E /* WishListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListController.swift; sourceTree = "<group>"; };
 		9F18CE082C5D2D5D00646D2E /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
-		9F18CE0A2C5D2F8400646D2E /* HomeviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeviewController.swift; sourceTree = "<group>"; };
+		9F18CE0A2C5D2F8400646D2E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9FD8990A2C6297DB00F070E1 /* FavoritesList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9FD8990B2C6297DB00F070E1 /* FavoritesList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9FD8990E2C64EC5D00F070E1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		9FE19E802C613A0C00EB9213 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
-		9FE19E822C613E4C00EB9213 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		9FE19E822C613E4C00EB9213 /* BookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +61,7 @@
 				9FE19E8A2C61400700EB9213 /* RxRelay in Frameworks */,
 				9FE19E7E2C6139AD00EB9213 /* Alamofire in Frameworks */,
 				9FE19E862C61400700EB9213 /* RxBlocking in Frameworks */,
+				9FE1E0DE2C678180003C448E /* Then in Frameworks */,
 				9FE19E882C61400700EB9213 /* RxCocoa in Frameworks */,
 				9F18CDF82C5D28B000646D2E /* Kingfisher in Frameworks */,
 				9F18CDFB2C5D28C000646D2E /* SnapKit in Frameworks */,
@@ -68,6 +74,8 @@
 		9F18CDD62C5D289E00646D2E = {
 			isa = PBXGroup;
 			children = (
+				9FD8990A2C6297DB00F070E1 /* FavoritesList+CoreDataClass.swift */,
+				9FD8990B2C6297DB00F070E1 /* FavoritesList+CoreDataProperties.swift */,
 				9F18CDE12C5D289E00646D2E /* BookingApp */,
 				9F18CDE02C5D289E00646D2E /* Products */,
 			);
@@ -110,7 +118,6 @@
 		9F18CDFD2C5D28DE00646D2E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9F18CDE62C5D289E00646D2E /* TabBarController.swift */,
 				9F18CE0C2C5D30B200646D2E /* ContentsView */,
 			);
 			path = View;
@@ -119,7 +126,7 @@
 		9F18CDFE2C5D28E100646D2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9FE19E822C613E4C00EB9213 /* Model.swift */,
+				9FE19E822C613E4C00EB9213 /* BookResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,7 +134,8 @@
 		9F18CE0C2C5D30B200646D2E /* ContentsView */ = {
 			isa = PBXGroup;
 			children = (
-				9F18CE0A2C5D2F8400646D2E /* HomeviewController.swift */,
+				9F18CE0A2C5D2F8400646D2E /* SearchViewController.swift */,
+				9FD8990E2C64EC5D00F070E1 /* Extension.swift */,
 				9F18CE062C5D2D1300646D2E /* WishListController.swift */,
 				9F18CE002C5D2A8700646D2E /* BookDetailView.swift */,
 				9F18CE082C5D2D5D00646D2E /* BookCell.swift */,
@@ -166,6 +174,7 @@
 				9FE19E852C61400700EB9213 /* RxBlocking */,
 				9FE19E872C61400700EB9213 /* RxCocoa */,
 				9FE19E892C61400700EB9213 /* RxRelay */,
+				9FE1E0DD2C678180003C448E /* Then */,
 			);
 			productName = BookingApp;
 			productReference = 9F18CDDF2C5D289E00646D2E /* BookingApp.app */;
@@ -200,6 +209,7 @@
 				9F18CDF92C5D28C000646D2E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9FE19E7C2C6139AD00EB9213 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9FE19E842C61400700EB9213 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				9FE1E0DC2C678180003C448E /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 9F18CDE02C5D289E00646D2E /* Products */;
 			projectDirPath = "";
@@ -227,14 +237,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD8990F2C64EC5D00F070E1 /* Extension.swift in Sources */,
 				9FE19E812C613A0C00EB9213 /* NetworkController.swift in Sources */,
-				9F18CDE72C5D289E00646D2E /* TabBarController.swift in Sources */,
-				9F18CE0B2C5D2F8400646D2E /* HomeviewController.swift in Sources */,
-				9FE19E832C613E4C00EB9213 /* Model.swift in Sources */,
+				9F18CE0B2C5D2F8400646D2E /* SearchViewController.swift in Sources */,
+				9FE19E832C613E4C00EB9213 /* BookResponse.swift in Sources */,
 				9F18CDEA2C5D289E00646D2E /* BookingApp.xcdatamodeld in Sources */,
 				9F18CE052C5D2C7A00646D2E /* DetailViewModel.swift in Sources */,
 				9F18CE032C5D2C6F00646D2E /* ListViewModel.swift in Sources */,
 				9F18CE012C5D2A8700646D2E /* BookDetailView.swift in Sources */,
+				9FD8990C2C6297DB00F070E1 /* FavoritesList+CoreDataClass.swift in Sources */,
+				9FD8990D2C6297DB00F070E1 /* FavoritesList+CoreDataProperties.swift in Sources */,
 				9F18CDE32C5D289E00646D2E /* AppDelegate.swift in Sources */,
 				9F18CE092C5D2D5D00646D2E /* BookCell.swift in Sources */,
 				9F18CE072C5D2D1300646D2E /* WishListController.swift in Sources */,
@@ -485,6 +497,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		9FE1E0DC2C678180003C448E /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -517,6 +537,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9FE19E842C61400700EB9213 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		9FE1E0DD2C678180003C448E /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FE1E0DC2C678180003C448E /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 
