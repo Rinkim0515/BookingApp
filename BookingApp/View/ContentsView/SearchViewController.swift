@@ -12,7 +12,7 @@ import RxSwift
 final class SearchViewController: UIViewController {
   
   var resultItems: [Book] = []
-  private var searchBar = UISearchBar()
+  var searchBar = UISearchBar()
   lazy var searchListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
   
   

@@ -126,7 +126,12 @@ class DetailBookViewController: UIViewController {
     self.dismiss(animated: true)
   }
   @objc func save(){
-    self.delegate?.didCompleteSave(bookName: selectedItem?.title ?? "")
+    guard let selectedItem = selectedItem else { return }
+    self.dismiss(animated: true) {
+      self.delegate?.didCompleteSave(bookName: self.selectedItem?.title ?? "")
+      CoreDataService.shared.saveBook(title: selectedItem.title, price: selectedItem.price, authors: selectedItem.authors, isbn: selectedItem.isbn)
+    }
+    
   }
   
   

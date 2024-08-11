@@ -44,6 +44,7 @@ extension SearchViewController: UICollectionViewDelegate{
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let detailVC = DetailBookViewController()
     detailVC.selectedItem = self.resultItems[indexPath.row]
+    detailVC.delegate = self
     present(detailVC, animated: true)
   }
 }
@@ -94,3 +95,13 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 
+extension SearchViewController: DetailBookViewControllerDelegate {
+  
+  func didCompleteSave(bookName: String) {
+    let message = "<\(bookName)> 가 즐겨찾기에 추가되었습니다!"
+    let alertController = UIAlertController(title: "담기완료", message: message, preferredStyle: .alert)
+    
+    alertController.addAction(.init(title: "확인", style: .default))
+    self.present(alertController, animated: true)
+  }
+}

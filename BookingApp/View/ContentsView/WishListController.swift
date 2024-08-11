@@ -9,6 +9,13 @@ import UIKit
 import SnapKit
 
 class WishListController: UIViewController {
+  var storedBooks: [BookEntity] = [] {
+    didSet {
+      DispatchQueue.main.async {
+        self.listCollectionView.reloadData()
+      }
+    }
+  }
   private let titleLabel = UILabel()
   private let deleteBtn = UIButton()
   private let addBtn = UIButton()
@@ -28,8 +35,13 @@ class WishListController: UIViewController {
     super.viewDidLoad()
     self.configureUI()
     self.makeConstraints()
+    self.storedBooks = CoreDataService.shared.fetchStoredBooks()
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    self.storedBooks = CoreDataService.shared.fetchStoredBooks()
+  }
   
   func configureUI(){
     [
@@ -45,9 +57,12 @@ class WishListController: UIViewController {
     titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
     deleteBtn.setTitle("전체 삭제", for: .normal)
     deleteBtn.setTitleColor(.systemGray, for: .normal)
+    deleteBtn.addTarget(self, action: #selector(deleteAllStoredBooks), for: .touchUpInside)
     addBtn.setTitle("추가", for: .normal)
     addBtn.setTitleColor(.systemGray, for: .normal)
-    
+    addBtn.addTarget(self, action: #selector(addNewBook), for: .touchUpInside)
+    listCollectionView.dataSource = self
+    listCollectionView.register(SearchResultItemCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultItemCollectionViewCell.id)
 
   }
   private func makeConstraints(){
@@ -86,4 +101,28 @@ extension WishListController {
     let config = UICollectionLayoutListConfiguration(appearance: .plain)
     return UICollectionViewCompositionalLayout.list(using: config)
   }
+  @objc func deleteAllStoredBooks(){
+    CoreDataService.shared.deleteAllStoredBooks()
+    self.storedBooks = []
+  }
+  @objc func addNewBook(){
+    self.tabBarController?.selectedIndex = 0
+    (self.tabBarController?.viewControllers?[0] as? SearchViewController)?.searchBar.becomeFirstResponder()
+    
+  }
+}
+extension WishListController: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    storedBooks.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultItemCollectionViewCell.id, for: indexPath) as! SearchResultItemCollectionViewCell
+    let storedBook = self.storedBooks[indexPath.row]
+  
+    cell.setLabelText(title: storedBook.title ?? "", authors: storedBook.authors!.components(separatedBy: ","), price: Int(storedBook.price))
+    return cell
+  }
+  
+  
 }

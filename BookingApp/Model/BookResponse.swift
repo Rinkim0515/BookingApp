@@ -32,9 +32,9 @@ struct Book: Decodable {
   let salePrice: Int
   let thumbnail: String
   let title: String
-  
+  let isbn: String
   enum CodingKeys: String, CodingKey {
-    case authors, contents, price
+    case authors, contents, price, isbn
     case salePrice = "sale_price"
     case thumbnail, title
   }
