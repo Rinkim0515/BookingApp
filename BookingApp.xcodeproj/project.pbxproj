@@ -17,7 +17,7 @@
 		9F18CE032C5D2C6F00646D2E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE022C5D2C6F00646D2E /* ListViewModel.swift */; };
 		9F18CE052C5D2C7A00646D2E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE042C5D2C7A00646D2E /* DetailViewModel.swift */; };
 		9F18CE072C5D2D1300646D2E /* WishListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE062C5D2D1300646D2E /* WishListController.swift */; };
-		9F18CE092C5D2D5D00646D2E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE082C5D2D5D00646D2E /* CollectionViewCell.swift */; };
+		9F18CE092C5D2D5D00646D2E /* SearchResultItemCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE082C5D2D5D00646D2E /* SearchResultItemCollectionView.swift */; };
 		9F18CE0B2C5D2F8400646D2E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE0A2C5D2F8400646D2E /* SearchViewController.swift */; };
 		9FD8990F2C64EC5D00F070E1 /* SVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD8990E2C64EC5D00F070E1 /* SVCExtension.swift */; };
 		9FE19E7E2C6139AD00EB9213 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE19E7D2C6139AD00EB9213 /* Alamofire */; };
@@ -29,6 +29,7 @@
 		9FE1E0DE2C678180003C448E /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE1E0DD2C678180003C448E /* Then */; };
 		9FE1E0E02C689D3F003C448E /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE1E0DF2C689D3F003C448E /* CoreDataService.swift */; };
 		9FE1E0E32C689E6B003C448E /* Books.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FE1E0E12C689E6B003C448E /* Books.xcdatamodeld */; };
+		9FE1E0E52C68D5A5003C448E /* RecentViewedBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE1E0E42C68D5A5003C448E /* RecentViewedBookCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,13 +43,14 @@
 		9F18CE022C5D2C6F00646D2E /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		9F18CE042C5D2C7A00646D2E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		9F18CE062C5D2D1300646D2E /* WishListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListController.swift; sourceTree = "<group>"; };
-		9F18CE082C5D2D5D00646D2E /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		9F18CE082C5D2D5D00646D2E /* SearchResultItemCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemCollectionView.swift; sourceTree = "<group>"; };
 		9F18CE0A2C5D2F8400646D2E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9FD8990E2C64EC5D00F070E1 /* SVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVCExtension.swift; sourceTree = "<group>"; };
 		9FE19E802C613A0C00EB9213 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		9FE19E822C613E4C00EB9213 /* BookResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookResponse.swift; sourceTree = "<group>"; };
 		9FE1E0DF2C689D3F003C448E /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		9FE1E0E22C689E6B003C448E /* Books.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Books.xcdatamodel; sourceTree = "<group>"; };
+		9FE1E0E42C68D5A5003C448E /* RecentViewedBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewedBookCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,10 +134,11 @@
 			isa = PBXGroup;
 			children = (
 				9F18CE0A2C5D2F8400646D2E /* SearchViewController.swift */,
+				9F18CE082C5D2D5D00646D2E /* SearchResultItemCollectionView.swift */,
+				9FE1E0E42C68D5A5003C448E /* RecentViewedBookCell.swift */,
 				9FD8990E2C64EC5D00F070E1 /* SVCExtension.swift */,
 				9F18CE062C5D2D1300646D2E /* WishListController.swift */,
 				9F18CE002C5D2A8700646D2E /* DetailBookViewController.swift */,
-				9F18CE082C5D2D5D00646D2E /* CollectionViewCell.swift */,
 			);
 			path = ContentsView;
 			sourceTree = "<group>";
@@ -241,10 +244,11 @@
 				9FE19E832C613E4C00EB9213 /* BookResponse.swift in Sources */,
 				9F18CE052C5D2C7A00646D2E /* DetailViewModel.swift in Sources */,
 				9F18CE032C5D2C6F00646D2E /* ListViewModel.swift in Sources */,
+				9FE1E0E52C68D5A5003C448E /* RecentViewedBookCell.swift in Sources */,
 				9F18CE012C5D2A8700646D2E /* DetailBookViewController.swift in Sources */,
 				9F18CDE32C5D289E00646D2E /* AppDelegate.swift in Sources */,
 				9FE1E0E32C689E6B003C448E /* Books.xcdatamodeld in Sources */,
-				9F18CE092C5D2D5D00646D2E /* CollectionViewCell.swift in Sources */,
+				9F18CE092C5D2D5D00646D2E /* SearchResultItemCollectionView.swift in Sources */,
 				9F18CE072C5D2D1300646D2E /* WishListController.swift in Sources */,
 				9F18CDE52C5D289E00646D2E /* SceneDelegate.swift in Sources */,
 			);

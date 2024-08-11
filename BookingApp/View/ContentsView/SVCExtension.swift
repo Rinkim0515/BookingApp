@@ -15,27 +15,64 @@ import UIKit
 extension SearchViewController: UICollectionViewDataSource {
   
   func createLayout() -> UICollectionViewCompositionalLayout {
-    var config = UICollectionLayoutListConfiguration(appearance: .plain)
-    config.headerMode = .supplementary
+    let supplementaryItem = NSCollectionLayoutBoundarySupplementaryItem(
+      layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                        heightDimension: .estimated(0)),
+      elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+    return UICollectionViewCompositionalLayout { section, env in
+      switch section {
+      case 0:
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1)))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalHeight(1.0), heightDimension: .absolute(70)), subitems: [item])
+        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(15)
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        section.boundarySupplementaryItems = [supplementaryItem]
+        section.orthogonalScrollingBehavior = .continuous
+        return section
+      default:
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.headerMode = .supplementary
+        let section = NSCollectionLayoutSection.list(using: config, layoutEnvironment: env)
+        section.boundarySupplementaryItems = [supplementaryItem]
+        return section
+        
+      }
+    }
     
-    return UICollectionViewCompositionalLayout.list(using: config)
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultItemCollectionViewCell.id, for: indexPath) as! SearchResultItemCollectionViewCell
-    let book = self.resultItems[indexPath.row]
-    cell.setLabelText(title: book.title, authors: book.authors, price: book.price)
-    return cell
+    
+    let resultItem = self.resultItems[indexPath.section][indexPath.row]
+    switch indexPath.section {
+    case 0:
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentViewedBookCell.id, for: indexPath) as! RecentViewedBookCell
+      cell.imageView.kf.setImage(with: URL(string: resultItem.thumbnail))
+      return cell
+      
+    default:
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultItemCollectionViewCell.id, for: indexPath) as! SearchResultItemCollectionViewCell
+      cell.setLabelText(title: resultItem.title, authors: resultItem.authors, price: resultItem.price)
+      return cell
+    }
+    
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return self.resultItems[section].count
+  }
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
     return self.resultItems.count
   }
   
-
+  
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     
-    return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchResultCollectionReusableView.id, for: indexPath)
+    let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchResultCollectionReusableView.id, for: indexPath) as! SearchResultCollectionReusableView
+    headerView.setTitle(on: indexPath.section)
+    return headerView
   }
   
 }
@@ -43,9 +80,29 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate{
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let detailVC = DetailBookViewController()
-    detailVC.selectedItem = self.resultItems[indexPath.row]
+    let selectedItem = self.resultItems[indexPath.section][indexPath.row]
+    detailVC.selectedItem = selectedItem
     detailVC.delegate = self
-    present(detailVC, animated: true)
+    
+    if indexPath.section == 1 {
+      self.addRecentViewBook(selectedItem)
+      
+    }
+    
+    self.present(detailVC, animated: true)
+  }
+  private func addRecentViewBook( _ book: Book) {
+    if let alreadyIn = self.resultItems[0].firstIndex( where: {
+      $0 == book} )
+    {
+      self.resultItems[0].remove(at: alreadyIn)
+      self.resultItems[0].insert(book, at: 0)
+    } else {
+      self.resultItems[0].insert(book, at: 0)
+    }
+    DispatchQueue.main.async {
+      self.searchListCollectionView.reloadSections(IndexSet(integer: 0))
+    }
   }
 }
 extension SearchViewController: UISearchBarDelegate {
@@ -78,7 +135,7 @@ extension SearchViewController: UISearchBarDelegate {
       }
       if let data = data,
          let bookResponse = try?JSONDecoder().decode(BookResponse.self, from: data) {
-        self?.resultItems = bookResponse.documents
+        self?.resultItems[1] = bookResponse.documents
         
         DispatchQueue.main.async {
           self?.searchListCollectionView.reloadData()

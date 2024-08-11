@@ -25,7 +25,7 @@ struct Meta: Decodable {
 }
 
 // MARK: - Document
-struct Book: Decodable {
+struct Book: Decodable, Equatable {
   let authors: [String]
   let contents: String
   let price: Int

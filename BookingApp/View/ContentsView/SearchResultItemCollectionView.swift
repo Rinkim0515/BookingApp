@@ -96,11 +96,18 @@ class SearchResultCollectionReusableView: UICollectionReusableView {
   }
   private func makeConstraints(){
     self.snp.makeConstraints{
-      $0.height.equalTo(40)
+      $0.height.equalTo(70)
     }
     titleLabel.snp.makeConstraints{
       $0.horizontalEdges.equalToSuperview().inset(16)
       $0.verticalEdges.equalToSuperview()
+    }
+  }
+  
+  func setTitle(on section: Int) {
+    switch section {
+    case 0: self.titleLabel.text = "최근 검색"
+    default: self.titleLabel.text = "검색 결과"
     }
   }
 }

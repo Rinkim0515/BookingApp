@@ -11,7 +11,7 @@ import RxSwift
 
 final class SearchViewController: UIViewController {
   
-  var resultItems: [Book] = []
+  var resultItems: [[Book]] = [[], []]
   var searchBar = UISearchBar()
   lazy var searchListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
   
@@ -51,6 +51,7 @@ final class SearchViewController: UIViewController {
     self.searchListCollectionView.delegate = self
     self.searchListCollectionView.dataSource = self
     self.searchListCollectionView.register(SearchResultItemCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultItemCollectionViewCell.id)
+    self.searchListCollectionView.register(RecentViewedBookCell.self, forCellWithReuseIdentifier: RecentViewedBookCell.id)
     self.searchListCollectionView.register(SearchResultCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchResultCollectionReusableView.id)
     self.searchBar.delegate = self
   }
@@ -63,7 +64,8 @@ final class SearchViewController: UIViewController {
     }
     self.searchListCollectionView.snp.makeConstraints{
       $0.top.equalTo(self.searchBar.snp.bottom)
-      $0.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
+      $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide).inset(16)
+        $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
     }
 
   }
