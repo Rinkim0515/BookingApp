@@ -12,7 +12,7 @@ import UIKit
 
 
 
-extension SearchViewController: UICollectionViewDelegate,UICollectionViewDataSource {
+extension SearchViewController: UICollectionViewDataSource {
   
   func createLayout() -> UICollectionViewCompositionalLayout {
     var config = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -32,18 +32,21 @@ extension SearchViewController: UICollectionViewDelegate,UICollectionViewDataSou
     return self.resultItems.count
   }
   
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-    
-  }
+
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     
     return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchResultCollectionReusableView.id, for: indexPath)
   }
   
-  
 }
 
+extension SearchViewController: UICollectionViewDelegate{
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let detailVC = DetailBookViewController()
+    detailVC.selectedItem = self.resultItems[indexPath.row]
+    present(detailVC, animated: true)
+  }
+}
 extension SearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()

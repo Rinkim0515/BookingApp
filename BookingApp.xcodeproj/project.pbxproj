@@ -14,7 +14,7 @@
 		9F18CDEF2C5D289F00646D2E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 9F18CDEE2C5D289F00646D2E /* Base */; };
 		9F18CDF82C5D28B000646D2E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9F18CDF72C5D28B000646D2E /* Kingfisher */; };
 		9F18CDFB2C5D28C000646D2E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F18CDFA2C5D28C000646D2E /* SnapKit */; };
-		9F18CE012C5D2A8700646D2E /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE002C5D2A8700646D2E /* BookDetailView.swift */; };
+		9F18CE012C5D2A8700646D2E /* DetailBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE002C5D2A8700646D2E /* DetailBookViewController.swift */; };
 		9F18CE032C5D2C6F00646D2E /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE022C5D2C6F00646D2E /* ListViewModel.swift */; };
 		9F18CE052C5D2C7A00646D2E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE042C5D2C7A00646D2E /* DetailViewModel.swift */; };
 		9F18CE072C5D2D1300646D2E /* WishListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18CE062C5D2D1300646D2E /* WishListController.swift */; };
@@ -40,7 +40,7 @@
 		9F18CDEB2C5D289F00646D2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F18CDEE2C5D289F00646D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F18CDF02C5D289F00646D2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F18CE002C5D2A8700646D2E /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
+		9F18CE002C5D2A8700646D2E /* DetailBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBookViewController.swift; sourceTree = "<group>"; };
 		9F18CE022C5D2C6F00646D2E /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		9F18CE042C5D2C7A00646D2E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		9F18CE062C5D2D1300646D2E /* WishListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListController.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 				9F18CE0A2C5D2F8400646D2E /* SearchViewController.swift */,
 				9FD8990E2C64EC5D00F070E1 /* SVCExtension.swift */,
 				9F18CE062C5D2D1300646D2E /* WishListController.swift */,
-				9F18CE002C5D2A8700646D2E /* BookDetailView.swift */,
+				9F18CE002C5D2A8700646D2E /* DetailBookViewController.swift */,
 				9F18CE082C5D2D5D00646D2E /* CollectionViewCell.swift */,
 			);
 			path = ContentsView;
@@ -244,7 +244,7 @@
 				9F18CDEA2C5D289E00646D2E /* BookingApp.xcdatamodeld in Sources */,
 				9F18CE052C5D2C7A00646D2E /* DetailViewModel.swift in Sources */,
 				9F18CE032C5D2C6F00646D2E /* ListViewModel.swift in Sources */,
-				9F18CE012C5D2A8700646D2E /* BookDetailView.swift in Sources */,
+				9F18CE012C5D2A8700646D2E /* DetailBookViewController.swift in Sources */,
 				9FD8990C2C6297DB00F070E1 /* FavoritesList+CoreDataClass.swift in Sources */,
 				9FD8990D2C6297DB00F070E1 /* FavoritesList+CoreDataProperties.swift in Sources */,
 				9F18CDE32C5D289E00646D2E /* AppDelegate.swift in Sources */,
