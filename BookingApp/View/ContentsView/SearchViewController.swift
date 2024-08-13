@@ -11,16 +11,18 @@ import RxSwift
 
 final class SearchViewController: UIViewController {
   
-  var resultItems: [[Book]] = [[], []]
+  let viewModel: SearchViewModel
+  
   var searchBar = UISearchBar()
   lazy var searchListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
   
-  
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+  init(viewModel: SearchViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
     self.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
   }
+  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -53,6 +55,7 @@ final class SearchViewController: UIViewController {
     self.searchListCollectionView.register(SearchResultItemCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultItemCollectionViewCell.id)
     self.searchListCollectionView.register(RecentViewedBookCell.self, forCellWithReuseIdentifier: RecentViewedBookCell.id)
     self.searchListCollectionView.register(SearchResultCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchResultCollectionReusableView.id)
+    self.searchListCollectionView.prefetchDataSource = self
     self.searchBar.delegate = self
   }
   

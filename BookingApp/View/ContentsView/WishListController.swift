@@ -126,3 +126,8 @@ extension WishListController: UICollectionViewDataSource {
   
   
 }
+
+extension WishListController: UICollectionViewDelegate {
+  
+
+}

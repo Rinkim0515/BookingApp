@@ -44,7 +44,7 @@ extension SearchViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    let resultItem = self.resultItems[indexPath.section][indexPath.row]
+    let resultItem = self.viewModel.resultItems[indexPath.section][indexPath.row]
     switch indexPath.section {
     case 0:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentViewedBookCell.id, for: indexPath) as! RecentViewedBookCell
@@ -60,11 +60,11 @@ extension SearchViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.resultItems[section].count
+    return self.viewModel.resultItems[section].count
   }
   
   func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return self.resultItems.count
+    return self.viewModel.resultItems.count
   }
   
   
@@ -80,7 +80,7 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate{
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let detailVC = DetailBookViewController()
-    let selectedItem = self.resultItems[indexPath.section][indexPath.row]
+    let selectedItem = self.viewModel.resultItems[indexPath.section][indexPath.row]
     detailVC.selectedItem = selectedItem
     detailVC.delegate = self
     
@@ -92,19 +92,51 @@ extension SearchViewController: UICollectionViewDelegate{
     self.present(detailVC, animated: true)
   }
   private func addRecentViewBook( _ book: Book) {
-    if let alreadyIn = self.resultItems[0].firstIndex( where: {
+    if let alreadyIn = self.viewModel.resultItems[0].firstIndex( where: {
       $0 == book} )
     {
-      self.resultItems[0].remove(at: alreadyIn)
-      self.resultItems[0].insert(book, at: 0)
+      self.viewModel.removeAndInsertToFirstInResultItemSecondSection(removeIndex: alreadyIn)
     } else {
-      self.resultItems[0].insert(book, at: 0)
+      self.viewModel.insertToFirstInResultItemSecondSection(book)
     }
     DispatchQueue.main.async {
       self.searchListCollectionView.reloadSections(IndexSet(integer: 0))
     }
   }
 }
+extension SearchViewController: UICollectionViewDataSourcePrefetching {
+  func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+    guard !self.viewModel.isEnd else { return }
+    guard !indexPaths.map({ $0.section }).contains(0) else { return }
+    guard let lastItem = indexPaths.map({$0.item}).sorted(by: <).last else { return }
+    if lastItem >= self.viewModel.resultItems[1].count - 10 {
+      
+
+      guard let keyword = searchBar.text
+      else { return }
+      
+      self.viewModel.currentPage = 1
+      NetworkService.shared.fetchBooks(query: keyword,
+                                       page:self.viewModel.currentPage) {
+        
+        bookResponse in
+        
+        self.viewModel.isEnd = bookResponse.meta.isEnd
+        if !self.viewModel.isEnd {
+          self.viewModel.currentPage += 1
+        }
+        self.viewModel.resultItems[1].append(contentsOf: bookResponse.documents)
+        
+
+        DispatchQueue.main.async {
+          self.searchListCollectionView.reloadSections(.init(integer: 1))
+        }
+      }
+    }
+  }
+}
+
+
 extension SearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
@@ -112,39 +144,23 @@ extension SearchViewController: UISearchBarDelegate {
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
     guard let keyword = searchBar.text
     else { return }
-    
-    var components = URLComponents(string: "https://dapi.kakao.com/v3/search/book")
-    
-    components?.queryItems = [
-      URLQueryItem(name: "query", value: keyword),
-      URLQueryItem(name: "size", value: "20")
-    ]
-    guard let url = components?.url else { return }
-    var urlRequest = URLRequest(url: url)
-    urlRequest.allHTTPHeaderFields = [
-      "Authorization": "KakaoAK 4ad73036f5366f94754121d02999f8e9"
-    ]
-    URLSession.shared.dataTask(with: urlRequest) { [weak self] data, response, error in
-      if let error = error {
-        print(error)
-        return
-      }
-      guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
-            (200..<300).contains(statusCode) else {
-        return
-      }
-      if let data = data,
-         let bookResponse = try?JSONDecoder().decode(BookResponse.self, from: data) {
-        self?.resultItems[1] = bookResponse.documents
-        
-        DispatchQueue.main.async {
-          self?.searchListCollectionView.reloadData()
-          
-        }
-      }
+    self.viewModel.currentPage = 1
+    NetworkService.shared.fetchBooks(query: keyword,
+                                     page:self.viewModel.currentPage) {
+      [weak self] bookResponse in
+      guard let self = self else{ return }
       
-      
-    }.resume()
+      self.viewModel.resultItems[1] = bookResponse.documents
+      self.viewModel.isEnd = bookResponse.meta.isEnd
+      if !self.viewModel.isEnd {
+        self.viewModel.currentPage += 1
+      }
+      DispatchQueue.main.async {
+        self.searchListCollectionView.reloadSections(.init(integer: 1))
+      }
+    }
+    
+
     
   }
   
