@@ -19,6 +19,7 @@ final class SearchViewController: UIViewController {
   init(viewModel: SearchViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
+    self.viewModel.delegate = self
     self.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 0)
   }
   
@@ -74,6 +75,13 @@ final class SearchViewController: UIViewController {
   }
 }
 
-
+extension SearchViewController: SearchViewModelDelegate {
+  
+  func didFetchBook() {
+    DispatchQueue.main.async {
+      self.searchListCollectionView.reloadSections(.init(integer: 1))
+    }
+  }
+}
 
 

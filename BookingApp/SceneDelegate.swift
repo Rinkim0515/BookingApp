@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     self.window = UIWindow(windowScene: windowScene)
     let tabBarController = UITabBarController()
-    
-    tabBarController.viewControllers = [SearchViewController(viewModel: SearchViewModel()), WishListController()]
+    let searchViewModel = SearchViewModel()
+    tabBarController.viewControllers = [SearchViewController(viewModel: searchViewModel), WishListController()]
     tabBarController.tabBar.backgroundColor = .white
     self.window?.rootViewController = tabBarController
     self.window?.makeKeyAndVisible()

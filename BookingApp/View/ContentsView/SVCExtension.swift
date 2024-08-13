@@ -91,11 +91,12 @@ extension SearchViewController: UICollectionViewDelegate{
     
     self.present(detailVC, animated: true)
   }
+  
   private func addRecentViewBook( _ book: Book) {
     if let alreadyIn = self.viewModel.resultItems[0].firstIndex( where: {
       $0 == book} )
     {
-      self.viewModel.removeAndInsertToFirstInResultItemSecondSection(removeIndex: alreadyIn)
+      self.viewModel.removeAndInsertToFirstInResultItemFirstSection(removeIndex: alreadyIn)
     } else {
       self.viewModel.insertToFirstInResultItemSecondSection(book)
     }
@@ -114,25 +115,10 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
 
       guard let keyword = searchBar.text
       else { return }
+      self.viewModel.fetchBooks(query: keyword)
       
-      self.viewModel.currentPage = 1
-      NetworkService.shared.fetchBooks(query: keyword,
-                                       page:self.viewModel.currentPage) {
-        
-        bookResponse in
-        
-        self.viewModel.isEnd = bookResponse.meta.isEnd
-        if !self.viewModel.isEnd {
-          self.viewModel.currentPage += 1
-        }
-        self.viewModel.resultItems[1].append(contentsOf: bookResponse.documents)
-        
-
-        DispatchQueue.main.async {
-          self.searchListCollectionView.reloadSections(.init(integer: 1))
-        }
-      }
     }
+
   }
 }
 
@@ -144,16 +130,16 @@ extension SearchViewController: UISearchBarDelegate {
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
     guard let keyword = searchBar.text
     else { return }
-    self.viewModel.currentPage = 1
+    self.viewModel.setCurrentPage(1)
     NetworkService.shared.fetchBooks(query: keyword,
                                      page:self.viewModel.currentPage) {
       [weak self] bookResponse in
       guard let self = self else{ return }
+      self.viewModel.setResultItemSecondSection(bookResponse.documents)
       
-      self.viewModel.resultItems[1] = bookResponse.documents
-      self.viewModel.isEnd = bookResponse.meta.isEnd
+      self.viewModel.setIsEnd(bookResponse.meta.isEnd)
       if !self.viewModel.isEnd {
-        self.viewModel.currentPage += 1
+        self.viewModel.setCurrentPage(self.viewModel.currentPage + 1)
       }
       DispatchQueue.main.async {
         self.searchListCollectionView.reloadSections(.init(integer: 1))
